@@ -32,12 +32,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
-            this.txtURL = new System.Windows.Forms.TextBox();
             this.btnLoad = new System.Windows.Forms.Button();
             this.dgvValues = new System.Windows.Forms.DataGridView();
             this.btnSave = new System.Windows.Forms.Button();
             this.txtFile = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.comboURL = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvValues)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,15 +49,6 @@
             this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "URL:";
-            // 
-            // txtURL
-            // 
-            this.txtURL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtURL.Location = new System.Drawing.Point(44, 12);
-            this.txtURL.Name = "txtURL";
-            this.txtURL.Size = new System.Drawing.Size(461, 20);
-            this.txtURL.TabIndex = 1;
             // 
             // btnLoad
             // 
@@ -119,18 +110,28 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "File";
             // 
+            // comboURL
+            // 
+            this.comboURL.DisplayMember = "one";
+            this.comboURL.FormattingEnabled = true;
+            this.comboURL.Location = new System.Drawing.Point(44, 7);
+            this.comboURL.Name = "comboURL";
+            this.comboURL.Size = new System.Drawing.Size(461, 21);
+            this.comboURL.TabIndex = 7;
+            this.comboURL.ValueMember = "one";
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnLoad;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(598, 440);
+            this.Controls.Add(this.comboURL);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtFile);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.dgvValues);
             this.Controls.Add(this.btnLoad);
-            this.Controls.Add(this.txtURL);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -145,12 +146,12 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtURL;
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.DataGridView dgvValues;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox txtFile;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboURL;
     }
 }
 

@@ -48,9 +48,12 @@ namespace tba2csv
         private void Form1_Load(object sender, EventArgs e)
         {
             string eventtcode = "2016calb";
-            string request = "/api/v2/event/" + eventtcode + "/matches";
-            txtURL.Text = request;
-            txtURL.Select(0, 0);
+            string team = "frc330";
+            string reqevent = "/api/v2/event/" + eventtcode + "/matches";
+            string reqteam = "/api/v2/team/" + team + "/event/" + eventtcode + "/matches";
+            comboURL.Items.Add(reqevent);
+            comboURL.Items.Add(reqteam);
+            comboURL.Text = reqevent;
             int cols = match.headers.Length;
 
             dgvValues.Columns.Clear();
@@ -64,7 +67,7 @@ namespace tba2csv
         // Read the JSON data from the server.
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            string jsonString = TBA_RequestJson(txtURL.Text);
+            string jsonString = TBA_RequestJson(comboURL.Text);
             if (jsonString != null)
             {
                 dgvValues.Rows.Clear();
