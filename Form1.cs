@@ -47,8 +47,8 @@ namespace tba2csv
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string eventtcode = "2016calb";
-            string team = "frc330";
+            string eventtcode = "2016cave";
+            string team = "frc5818";
             string reqevent = "/api/v2/event/" + eventtcode + "/matches";
             string reqteam = "/api/v2/team/" + team + "/event/" + eventtcode + "/matches";
             comboURL.Items.Add(reqevent);
