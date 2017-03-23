@@ -30,6 +30,7 @@ namespace tba2csv
             public short score;
 
             public string robot1Auto, robot2Auto, robot3Auto;
+#if STRONGHOLD
             public short autoBouldersLow, autoBouldersHigh;
 
             public short pos1crossings, pos2crossings, pos3crossings, pos4crossings, pos5crossings;
@@ -40,14 +41,26 @@ namespace tba2csv
             public short towerEndStrength, teleopTowerCaptured;
 
             public string towerFaceA, towerFaceB, towerFaceC;
-            public short foulCount, techFoulCount;
 
-            public short autoReachPoints, autoCrossingPoints, autoBoulderPoints, autoPoints;
+            public short autoReachPoints, autoCrossingPoints, autoBoulderPoints;
 
-            public short teleopCrossingPoints, breachPoints, teleopBoulderPoints, teleopPoints;
+            public short teleopCrossingPoints, breachPoints, teleopBoulderPoints;
             public short capturePoints, teleopChallengePoints, teleopScalePoints;
-
             public short foulPoints, adjustPoints;
+#else
+            public short autoRotorPoints, autoFuelHigh, autoFuelLow;
+            public bool rotor1Auto, rotor2Auto;
+            public short autoMobilityPoints, autoFuelPoints;
+
+            public short teleopFuelHigh, teleopFuelLow;
+            public short teleopRotorPoints, teleopFuelPoints, teleopTakeoffPoints;
+            public bool rotor1Engaged, rotor2Engaged, rotor3Engaged, rotor4Engaged;
+            public string touchpadFar, touchpadNear, touchpadMiddle;
+            public bool kPaRankingPoint, rotorRankingPoint;
+            public short kPaBonusPoints, rotorBonusPoints;
+#endif
+            public short foulCount, techFoulCount;
+            public short autoPoints, teleopPoints;
 
             public void ParseJson(string str)
             {
@@ -67,6 +80,7 @@ namespace tba2csv
                         case "robot3Auto":
                             robot3Auto = value;
                             break;
+#if STRONGHOLD
                         case "autoBouldersLow":
                             autoBouldersLow = (short)p.Value;
                             break;
@@ -130,13 +144,6 @@ namespace tba2csv
                             towerFaceC = value;
                             break;
 
-                        case "foulCount":
-                            foulCount = (short)p.Value;
-                            break;
-                        case "techFoulCount":
-                            techFoulCount = (short)p.Value;
-                            break;
-
                         case "autoReachPoints":
                             autoReachPoints = (short)p.Value;
                             break;
@@ -145,9 +152,6 @@ namespace tba2csv
                             break;
                         case "autoBoulderPoints":
                             autoBoulderPoints = (short)p.Value;
-                            break;
-                        case "autoPoints":
-                            autoPoints = (short)p.Value;
                             break;
 
                         case "teleopCrossingPoints":
@@ -173,17 +177,98 @@ namespace tba2csv
                         case "teleopScalePoints":
                             teleopScalePoints = (short)p.Value;
                             break;
+#else
+                        case "autoFuelLow":
+                            autoFuelLow = (short)p.Value;
+                            break;
+                        case "autoFuelHigh":
+                            autoFuelHigh = (short)p.Value;
+                            break;
+                        case "autoMobilityPoints":
+                            autoMobilityPoints = (short)p.Value;
+                            break;
+                        case "autoFuelPoints":
+                            autoFuelPoints = (short)p.Value;
+                            break;
+                        case "rotor1Auto":
+                            rotor1Auto = (bool) p.Value;
+                            break;
+                        case "rotor2Auto":
+                            rotor2Auto = (bool) p.Value;
+                            break;
+                        case "autoRotorPoints":
+                            autoRotorPoints = (short)p.Value;
+                            break;
 
-                        case "foulPoints":
-                            foulPoints = (short)p.Value;
+                        case "teleopFuelLow":
+                            teleopFuelLow = (short)p.Value;
                             break;
-                        case "adjustPoints":
-                            adjustPoints = (short)p.Value;
+                        case "teleopFuelHigh":
+                            teleopFuelHigh = (short)p.Value;
                             break;
+                        case "teleopFuelPoints":
+                            teleopFuelPoints = (short)p.Value;
+                            break;
+                        case "teleopRotorPoints":
+                            teleopRotorPoints = (short)p.Value;
+                            break;
+                        case "teleopTakeoffPoints":
+                            teleopTakeoffPoints = (short)p.Value;
+                            break;
+
+                        case "rotor1Engaged":
+                            rotor1Engaged = (bool)p.Value;
+                            break;
+                        case "rotor2Engaged":
+                            rotor2Engaged = (bool)p.Value;
+                            break;
+                        case "rotor3Engaged":
+                            rotor3Engaged = (bool)p.Value;
+                            break;
+                        case "rotor4Engaged":
+                            rotor4Engaged = (bool)p.Value;
+                            break;
+
+                        case "touchpadFar":
+                            touchpadFar = (string) p.Value;
+                            break;
+                        case "touchpadNear":
+                            touchpadNear = (string)p.Value;
+                            break;
+                        case "touchpadMiddle":
+                            touchpadMiddle = (string)p.Value;
+                            break;
+
+                        case "rotorRankingPointAchieved":
+                            rotorRankingPoint = (bool)p.Value;
+                            break;
+                        case "kPaRankingPointAchieved":
+                            kPaRankingPoint  = (bool)p.Value;
+                            break;
+                        case "rotorBonusPoints":
+                            rotorBonusPoints = (short)p.Value;
+                            break;
+                        case "kPaBonusPoints":
+                            kPaBonusPoints = (short)p.Value;
+                            break;
+
+#endif
+                        case "autoPoints":
+                            autoPoints = (short)p.Value;
+                            break;
+                        case "foulCount":
+                            foulCount = (short)p.Value;
+                            break;
+                        case "techFoulCount":
+                            techFoulCount = (short)p.Value;
+                            break;
+                        case "teleopPoints":
+                            teleopPoints = (short)p.Value;
+                            break;
+
                         case "totalPoints":
                             score = (short)p.Value;
                             break;
-
                         default:
                             Debug.WriteLine("UNKNOWN " + name + ":" + value);
                             break;
@@ -229,6 +314,7 @@ namespace tba2csv
                 sa[5] = robot1Auto;
                 sa[6] = robot2Auto;
                 sa[7] = robot3Auto;
+#if STRONGHOLD
                 sa[8] = autoBouldersLow.ToString();
                 sa[9] = autoBouldersHigh.ToString();
                 sa[10] = pos1crossings.ToString();
@@ -268,9 +354,34 @@ namespace tba2csv
                 sa[37] = capturePoints.ToString();
                 sa[38] = teleopChallengePoints.ToString();
                 sa[39] = teleopScalePoints.ToString();
-
                 sa[40] = foulPoints.ToString();
                 sa[41] = adjustPoints.ToString();
+#else
+                sa[8] = autoRotorPoints.ToString();
+                sa[9] = autoFuelHigh.ToString();
+                sa[10] = autoFuelLow.ToString();
+                sa[11] = rotor1Auto.ToString();
+                sa[12] = rotor2Auto.ToString();
+                sa[13] = autoMobilityPoints.ToString();
+                sa[14] = autoFuelPoints.ToString();
+
+                sa[15] = teleopFuelHigh.ToString();
+                sa[16] = teleopFuelLow.ToString();
+                sa[17] = teleopRotorPoints.ToString();
+                sa[18] = teleopFuelPoints.ToString();
+                sa[19] = teleopTakeoffPoints.ToString();
+                sa[20] = rotor1Engaged.ToString();
+                sa[21] = rotor2Engaged.ToString();
+                sa[22] = rotor3Engaged.ToString();
+                sa[23] = rotor4Engaged.ToString();
+                sa[24] = touchpadFar.ToString();
+                sa[25] = touchpadNear.ToString();
+                sa[26] = touchpadMiddle.ToString();
+                sa[27] = kPaRankingPoint.ToString();
+                sa[28] = rotorRankingPoint.ToString();
+                sa[29] = kPaBonusPoints.ToString();
+                sa[30] = rotorBonusPoints.ToString();
+#endif
                 return sa;
             }
 
@@ -352,10 +463,10 @@ namespace tba2csv
                 switch (name)
                 {
                     case "blue":
-                        ParseJsonTeam(value, blue);
+                        if (blue != null) ParseJsonTeam(value, blue);
                         break;
                     case "red":
-                        ParseJsonTeam(value, red);
+                        if (red != null) ParseJsonTeam(value, red);
                         break;
                 }
             }
@@ -366,9 +477,9 @@ namespace tba2csv
             "Key",
             "Team1", "Team2", "Team3",
             "Score",
-
             // Autonomous
             "Robot1Auto","Robot2Auto","Robot3Auto",
+#if STRONGHOLD
             "BouldersLow","BouldersHigh",
 
             // Defenses
@@ -388,8 +499,21 @@ namespace tba2csv
             "CrossingPoints","Points","BoulderPoints","TeleopPoints",
 
             "CapturePoints","ChallengePoints","ScalePoints",
-
             "FoulPoints","AdjustPoints"
+#else
+            // Autonomous
+            "autoRotorPoints", "autoFuelHigh", "autoFuelLow",
+            "rotor1Auto", "rotor2Auto",
+            "autoMobilityPoints", "autoFuelPoints",
+
+            // Teleop
+            "teleopFuelHigh", "teleopFuelLow",
+            "teleopRotorPoints", "teleopFuelPoints", "teleopTakeoffPoints",
+            "rotor1Engaged", "rotor2Engaged", "rotor3Engaged", "rotor4Engaged",
+            "touchpadFar", "touchpadNear", "touchpadMiddle",
+            "kPaRankingPoint", "rotorRankingPoint",
+            "kPaBonusPoints", "rotorBonusPoints",
+#endif
         };
 
         /// <summary>
@@ -413,7 +537,7 @@ namespace tba2csv
                     switch (name)
                     {
                         case "score_breakdown":
-                            matches[row].ParseJsonScore(value);
+                            if (value.Length > 0) matches[row].ParseJsonScore(value);
                             break;
                         case "alliances":
                             matches[row].ParseJsonAlliances(value);

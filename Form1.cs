@@ -47,7 +47,7 @@ namespace tba2csv
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string eventtcode = "2016cave";
+            string eventtcode = "2017casd";
             string team = "frc5818";
             string reqevent = "/api/v2/event/" + eventtcode + "/matches";
             string reqteam = "/api/v2/team/" + team + "/event/" + eventtcode + "/matches";
@@ -80,16 +80,22 @@ namespace tba2csv
                 {
                     string[] values;
                     dgvValues.Rows.Add();
-                    values = matches[row].blue.ToStrings();
-                    for (int col = 0; col < cols; ++col)
+                    if (matches[row].blue != null)
                     {
-                        dgvValues.Rows[row*2].Cells[col].Value = values[col];
+                        values = matches[row].blue.ToStrings();
+                        for (int col = 0; col < cols; ++col)
+                        {
+                            dgvValues.Rows[row * 2].Cells[col].Value = values[col];
+                        }
                     }
                     dgvValues.Rows.Add();
-                    values = matches[row].red.ToStrings();
-                    for (int col = 0; col < cols; ++col)
+                    if (matches[row].red != null)
                     {
-                        dgvValues.Rows[row*2 + 1].Cells[col].Value = values[col];
+                        values = matches[row].red.ToStrings();
+                        for (int col = 0; col < cols; ++col)
+                        {
+                            dgvValues.Rows[row * 2 + 1].Cells[col].Value = values[col];
+                        }
                     }
                 }
             }
@@ -127,21 +133,27 @@ namespace tba2csv
 
             for (int r = 0; r < rows; ++r)
             {
-                string line = "";
-                for (int c = 0; c < cols; ++c)
+                try
                 {
-                    String str = dgvValues.Rows[r].Cells[c].Value.ToString();
-                    // Escape dquotes in str
-                    str = str.Replace("\"", "\"\"");
-                    // Quote if str contains a comma
-                    if (str.Contains(","))
-                        str = '"' + str + '"';
-                    if (c != 0)
-                        line += ',' + str;
-                    else
-                        line = str;
+                    string line = "";
+                    for (int c = 0; c < cols; ++c)
+                    {
+                        String str = dgvValues.Rows[r].Cells[c].Value.ToString();
+                        // Escape dquotes in str
+                        str = str.Replace("\"", "\"\"");
+                        // Quote if str contains a comma
+                        if (str.Contains(","))
+                            str = '"' + str + '"';
+                        if (c != 0)
+                            line += ',' + str;
+                        else
+                            line = str;
+                    }
+                    file.WriteLine(line);
                 }
-                file.WriteLine(line);
+                catch (Exception ex)
+                {
+                }
             }
             file.Close();
         }
